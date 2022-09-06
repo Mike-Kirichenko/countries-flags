@@ -3,7 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { IoArrowBack } from "react-icons/io5";
 import { selectDetails } from "../store/details/details-selector";
-import { loadCountryByName } from "../store/details/details-actions";
+import {
+  clearDetails,
+  loadCountryByName,
+} from "../store/details/details-actions";
 import { Button } from "../components/Button";
 import { Info } from "../components/Info";
 
@@ -15,6 +18,9 @@ export const Details = () => {
 
   useEffect(() => {
     dispatch(loadCountryByName(name));
+    return () => {
+      dispatch(clearDetails());
+    };
   }, [dispatch, name]);
 
   return (
